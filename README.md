@@ -2,7 +2,7 @@
 
 ## API Framework for Azure Functions
 
-az-func-api is a lightweight and flexible API framework designed to simplify the development of serverless applications on Azure Functions. It provides an easy-to-use routing system, middleware support, and hooks for pre- and post-processing requests.
+`az-func-api` is a lightweight and flexible API framework designed to simplify the development of serverless applications on Azure Functions. It provides an easy-to-use routing system, middleware support, and hooks for pre- and post-processing requests.
 
 ## Features
 
