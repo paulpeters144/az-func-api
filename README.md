@@ -8,7 +8,7 @@
 
 -  Simple routing for endpoints
 -  Middleware support with pre- and post-hook processing
--  Create full featured APIs in an Azure Function
+-  Create fully featured APIs in an Azure Function
 -  Typescript support for safety
 
 ## Installation
