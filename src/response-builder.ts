@@ -2,7 +2,7 @@ import { HttpRequestBodyInit, HttpResponseInit } from '@azure/functions';
 import { IApiResponse, IApiCookie } from '.';
 
 export const ResponseBuilder = () => {
-   let response: IApiResponse = {
+   const response: IApiResponse = {
       status: 200,
       enableContentNegotiation: false,
    };

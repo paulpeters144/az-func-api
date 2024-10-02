@@ -32,7 +32,7 @@ export class AzFuncApi {
       const { method, path, request, context } = reqParams;
 
       const req = await this._convertToApiRequest(request, context);
-      let normalizedPath = this._normalizePath(method as Method, path);
+      const normalizedPath = this._normalizePath(method as Method, path);
 
       let response: IApiResponse | null;
       for (const routePath in this.endpoints) {
