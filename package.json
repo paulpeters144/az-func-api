@@ -1,6 +1,6 @@
 {
    "name": "az-func-api",
-   "version": "0.0.5",
+   "version": "0.0.6",
    "description": "API Framework for Azure Functions",
    "author": "Paul Q. Peters",
    "main": "dist/src/index.js",

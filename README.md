@@ -7,9 +7,9 @@
 ## Features
 
 -  Simple routing for endpoints
--  Middleware support for pre- and post-processing
--  Built-in logging hooks
--  TypeScript support for type safety
+-  Middleware support with pre- and post-hook processing
+-  Create full featured APIs in an Azure Function
+-  Typescript support for safety
 
 ## Installation
 
@@ -43,7 +43,7 @@ azApi.buildRoutes();
 ```typescript
 const azApi = new AzFuncApi();
 
-// Define a route for POST /top-route/sub-route/post/echo
+// POST /top-route/sub-route/post/echo
 azApi
    .route('/top-route', (router: IRouter) => {
       router
@@ -52,40 +52,43 @@ azApi
                .post('/post/echo', (req: IApiRequest) => {
                   return { status: 200, body: { id: req.body } };
                })
-               .addPreHook(log('1').preroute) // Pre-hook for the POST endpoint
-               .addPostHook(log('1').postroute); // Post-hook for the POST endpoint
+               .addPreHook(log('1').preroute)
+               .addPostHook(log('1').postroute);
          })
-         .addPreHook(log('2').preroute) // Pre-hook for the sub-route
-         .addPostHook(log('2').postroute); // Post-hook for the sub-route
+         .addPreHook(log('2').preroute)
+         .addPostHook(log('2').postroute);
    })
-   .addPreHook(log('3').preroute) // Pre-hook for the top route
-   .addPostHook(log('3').postroute); // Post-hook for the top route
+   .addPreHook(log('3').preroute)
+   .addPostHook(log('3').postroute);
 
-// Build the routes
 azApi.buildRoutes();
 
-// Log function definition
 const log = (msg: string) => {
    const preroute = (req: IApiRequest) => {
-      console.log('PRE-ROUTE: ' + msg);
+      console.log('PRE-HOOK: ' + msg);
       // Returning null allows the request to proceed to the endpoint
+      // Or return an IApiResponse to protect the route/endpoint
+      // PreRouteHooks can be useful for json validation or authorization
       return null;
    };
 
    const postroute = (req: IApiRequest, res: IApiResponse) => {
-      console.log('POST-ROUTE: ' + msg);
+      // Modify the response post endpoint or post route.
+      // Can be useful for creating route defined CORS policies or
+      // sanitizing responses before being sent to callers.
+      console.log('POST-HOOK: ' + msg);
    };
 
    return { preroute, postroute };
 };
 
-// PRE-ROUTE: 1
-// PRE-ROUTE: 2
-// PRE-ROUTE: 3
+// PRE-HOOK: 1
+// PRE-HOOK: 2
+// PRE-HOOK: 3
 //  --POST-ENDPOINT--
-// POST-ROUTE: 1
-// POST-ROUTE: 2
-// POST-ROUTE: 3
+// POST-HOOK: 1
+// POST-HOOK: 2
+// POST-HOOK: 3
 ```
 
 ## License

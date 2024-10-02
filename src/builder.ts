@@ -40,8 +40,8 @@ export const routeBuilder = (routes: IRouterInternal[]) => {
          for (const endpoint of endpoints) {
             let currentRoute = endpoint.parentRoute;
             while (currentRoute) {
-               endpoint.addPreHook(...currentRoute.preHandlers);
-               endpoint.addPostHandler(...currentRoute.postHandlers);
+               endpoint.addPreHook(...currentRoute.preHook);
+               endpoint.addPostHandler(...currentRoute.postHook);
                currentRoute = currentRoute.parentRoute;
             }
          }

@@ -33,8 +33,8 @@ export interface IRouterInternal extends IRouter {
    parentRoute: IRouterInternal;
    subroutes: IRouterInternal[];
    endpoints: IEndpointHandlerInternal[];
-   preHandlers: IPreHook[];
-   postHandlers: IPostHook[];
+   preHook: IPreHook[];
+   postHook: IPostHook[];
 }
 
 export const RouteHandler = (
@@ -53,8 +53,8 @@ export const RouteHandler = (
       subroutes: _subroutes,
       endpoints: _endpoints,
       parentRoute,
-      preHandlers: _pre,
-      postHandlers: _post,
+      preHook: _pre,
+      postHook: _post,
       addPreHook: null!,
       addPostHook: null!,
       route: null!,
