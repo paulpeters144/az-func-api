@@ -2,7 +2,7 @@
 
 ## API Framework for Azure Functions
 
-`az-func-api` is a lightweight and flexible API framework designed to simplify the development of serverless applications on Azure Functions. It provides an easy-to-use routing system, middleware support, and hooks for pre- and post-processing requests.
+`az-func-api` is a lightweight and flexible API framework designed to simplify the development of serverless applications in Azure Functions. It provides an easy-to-use routing system, middleware support, and hooks for pre- and post-processing requests.
 
 ## Features
 
@@ -74,8 +74,8 @@ const log = (msg: string) => {
 
    const postroute = (req: IApiRequest, res: IApiResponse) => {
       // Modify the response post endpoint or post route.
-      // Can be useful for creating route defined CORS policies or
-      // sanitizing responses before being sent to callers.
+      // PostRouteHooks an be useful for creating route defined CORS
+      // policies or sanitizing responses before being sent to callers.
       console.log('POST-HOOK: ' + msg);
    };
 
