@@ -1,4 +1,4 @@
-import { HttpRequestBodyInit, HttpResponseInit } from '@azure/functions';
+import { HttpResponseInit } from '@azure/functions';
 import { IApiResponse, IApiCookie } from '.';
 
 export const ResponseBuilder = () => {

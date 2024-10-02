@@ -21,20 +21,71 @@ npm install az-func-api
 
 ## Usage
 
-Here's a quick example to get you started:
+#### Hello World Example
 
 ```typescript
-import { AzFuncApi } from 'az-func-api';
+import AzFuncApi, { IRouter, IApiRequest } from 'az-func-api';
 
 const azApi = new AzFuncApi();
 
-azApi.route('/example', (router) => {
-   router.get('/', (req) => {
-      return { status: 200, body: { message: 'Hello, world!' } };
+// GET /api/v1/get/endpoint
+azApi.route('/api/v1', (router: IRouter) => {
+   router.get('/get/endpoint', (req: IApiRequest) => {
+      return { body: { message: 'Hello, World!' } };
    });
 });
 
-// more documentation to come later
+azApi.buildRoutes();
+```
+
+#### Example with Pre & Post Hooks
+
+```typescript
+const azApi = new AzFuncApi();
+
+// Define a route for POST /top-route/sub-route/post/echo
+azApi
+   .route('/top-route', (router: IRouter) => {
+      router
+         .route('/sub-route', (router: IRouter) => {
+            router
+               .post('/post/echo', (req: IApiRequest) => {
+                  return { status: 200, body: { id: req.body } };
+               })
+               .addPreHook(log('1').preroute) // Pre-hook for the POST endpoint
+               .addPostHook(log('1').postroute); // Post-hook for the POST endpoint
+         })
+         .addPreHook(log('2').preroute) // Pre-hook for the sub-route
+         .addPostHook(log('2').postroute); // Post-hook for the sub-route
+   })
+   .addPreHook(log('3').preroute) // Pre-hook for the top route
+   .addPostHook(log('3').postroute); // Post-hook for the top route
+
+// Build the routes
+azApi.buildRoutes();
+
+// Log function definition
+const log = (msg: string) => {
+   const preroute = (req: IApiRequest) => {
+      console.log('PRE-ROUTE: ' + msg);
+      // Returning null allows the request to proceed to the endpoint
+      return null;
+   };
+
+   const postroute = (req: IApiRequest, res: IApiResponse) => {
+      console.log('POST-ROUTE: ' + msg);
+   };
+
+   return { preroute, postroute };
+};
+
+// PRE-ROUTE: 1
+// PRE-ROUTE: 2
+// PRE-ROUTE: 3
+//  --POST-ENDPOINT--
+// POST-ROUTE: 1
+// POST-ROUTE: 2
+// POST-ROUTE: 3
 ```
 
 ## License

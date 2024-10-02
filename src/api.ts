@@ -4,6 +4,7 @@ import { IEndpointHandlerInternal } from './endpoint-handler';
 import { IRouterInternal, RouteHandler } from './route-handler';
 import { routeBuilder } from './builder';
 import { ResponseBuilder } from './response-builder';
+import { ApiAlreadyBuiltError, ApiNotBuiltError } from './errors';
 
 interface RequestParams {
    method: string;
@@ -26,7 +27,7 @@ export class AzFuncApi {
 
    async handle(reqParams: RequestParams): Promise<HttpResponseInit> {
       if (!this._built) {
-         this._buildRoutes();
+         throw new ApiNotBuiltError();
       }
 
       const { method, path, request, context } = reqParams;
@@ -54,7 +55,11 @@ export class AzFuncApi {
          .build();
    }
 
-   private _buildRoutes() {
+   buildRoutes() {
+      if (this._built) {
+         throw new ApiAlreadyBuiltError();
+      }
+
       this.endpoints = routeBuilder(this.routes).build();
       this._built = true;
       this.routes = null;

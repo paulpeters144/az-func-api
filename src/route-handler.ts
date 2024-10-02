@@ -21,6 +21,11 @@ export interface IRouter {
       handler: (req: IApiRequest) => IApiResponse | Promise<IApiResponse>
    ) => IEndpointHandler;
    route(path: string, func: (router: IRouter) => void): IRouter;
+   get: (
+      path: string,
+      handler: (req: IApiRequest) => IApiResponse | Promise<IApiResponse>
+   ) => IEndpointHandler;
+   route(path: string, func: (router: IRouter) => void): IRouter;
 }
 
 export interface IRouterInternal extends IRouter {
@@ -54,6 +59,7 @@ export const RouteHandler = (
       addPostHook: null!,
       route: null!,
       post: null!,
+      get: null!,
    };
 
    const addPreHandler: IAddPreHook = (...preHandlers) => {
@@ -78,6 +84,12 @@ export const RouteHandler = (
       return endpoint;
    };
 
+   const get = (path: string, handler: (req: IApiRequest) => IApiResponse) => {
+      const endpoint = _registerEndpoint('GET', path, handler);
+      _endpoints.push(endpoint);
+      return endpoint;
+   };
+
    const _registerEndpoint = (
       method: Method,
       path: string,
@@ -97,6 +109,7 @@ export const RouteHandler = (
       addPostHook: addPostHandler,
       route,
       post,
+      get,
    });
 
    return self;

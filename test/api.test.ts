@@ -37,14 +37,14 @@ describe('az-func-api', () => {
             router.route('/sub-route', (router: IRouter) => {
                //
                router
-                  .post('/endpoint', (req: IApiRequest) => {
+                  .get('/get/endpoint', (req: IApiRequest) => {
                      return { status: 200, body: { message: 'worked!' } };
                   })
                   .addPreHook(log('PRE for /endpoint').preroute)
                   .addPostHook(log('POST for /endpoint').postroute);
                //
                router
-                  .post('/endpoint/:userId', (req: IApiRequest) => {
+                  .post('/post/endpoint/:userId', (req: IApiRequest) => {
                      return { status: 200, body: { id: req.params?.userId } };
                   })
                   .addPreHook(log('PRE for /endpoint/:userId').preroute)
@@ -56,9 +56,11 @@ describe('az-func-api', () => {
          .addPreHook(log('PRE for /top-route').preroute)
          .addPostHook(log('POST for /top-route').postroute);
 
+      azApi.buildRoutes();
+
       const res = await azApi.handle({
-         method: 'POST',
-         path: '/top-route/sub-route/endpoint/123',
+         method: 'GET',
+         path: '/top-route/sub-route/get/endpoint',
          request: API_REQ,
       });
 
@@ -80,6 +82,8 @@ describe('az-func-api', () => {
                .addPreHook((req: IApiRequest) => null);
          })
          .addPreHook((req: IApiRequest) => null);
+
+      azApi.buildRoutes();
 
       const res = await azApi.handle({
          method: 'POST',
