@@ -1,6 +1,6 @@
 {
    "name": "az-func-api",
-   "version": "0.0.3",
+   "version": "0.0.5",
    "description": "API Framework for Azure Functions",
    "author": "Paul Q. Peters",
    "main": "dist/src/index.js",
@@ -10,7 +10,7 @@
       "test": "vitest",
       "prepublishOnly": "npm run build",
       "format": "prettier --write .",
-      "lint": "eslint . --ext .ts,.tsx --fix"
+      "lint": "eslint . --ext .ts --fix"
    },
    "repository": {
       "type": "git",
@@ -20,6 +20,9 @@
       "azure",
       "functions",
       "api"
+   ],
+   "files": [
+      "dist"
    ],
    "license": "MIT",
    "dependencies": {
