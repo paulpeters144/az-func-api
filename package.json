@@ -1,30 +1,34 @@
 {
-  "name": "az-func-api",
-  "version": "0.0.2",
-  "description": "API Framework for Azure Functions",
-  "author": "Paul Q. Peters",
-  "main": "src/index.ts",
-  "scripts": {
-    "build": "tsc",
-    "test": "vitest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/paulpeters144/az-func-api.git"
-  },
-  "keywords": [
-    "azure",
-    "functions",
-    "api"
-  ],
-  "license": "MIT",
-  "dependencies": {
-    "@azure/functions": "^4.0.0"
-  },
-  "devDependencies": {
-    "@types/node": "18.x",
-    "azure-functions-core-tools": "^4.x",
-    "typescript": "^4.0.0",
-    "vitest": "^2.1.1"
-  }
+   "name": "az-func-api",
+   "version": "0.0.3",
+   "description": "API Framework for Azure Functions",
+   "author": "Paul Q. Peters",
+   "main": "dist/src/index.js",
+   "types": "dist/src/index.d.ts",
+   "scripts": {
+      "build": "tsc",
+      "test": "vitest",
+      "prepublishOnly": "npm run build",
+      "format": "prettier --write ."
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/paulpeters144/az-func-api.git"
+   },
+   "keywords": [
+      "azure",
+      "functions",
+      "api"
+   ],
+   "license": "MIT",
+   "dependencies": {
+      "@azure/functions": "^4.0.0"
+   },
+   "devDependencies": {
+      "@types/node": "18.x",
+      "azure-functions-core-tools": "^4.x",
+      "prettier": "^3.3.3",
+      "typescript": "^4.0.0",
+      "vitest": "^2.1.1"
+   }
 }

@@ -6,10 +6,10 @@
 
 ## Features
 
-- Simple routing for endpoints
-- Middleware support for pre- and post-processing
-- Built-in logging hooks
-- TypeScript support for type safety
+-  Simple routing for endpoints
+-  Middleware support for pre- and post-processing
+-  Built-in logging hooks
+-  TypeScript support for type safety
 
 ## Installation
 
@@ -24,14 +24,14 @@ npm install az-func-api
 Here's a quick example to get you started:
 
 ```typescript
-import { AzFuncApi } from "az-func-api";
+import { AzFuncApi } from 'az-func-api';
 
 const azApi = new AzFuncApi();
 
-azApi.route("/example", (router) => {
-  router.get("/", (req) => {
-    return { status: 200, body: { message: "Hello, world!" } };
-  });
+azApi.route('/example', (router) => {
+   router.get('/', (req) => {
+      return { status: 200, body: { message: 'Hello, world!' } };
+   });
 });
 
 // more documentation to come later

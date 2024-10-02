@@ -1,12 +1,14 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "es6",
-    "outDir": "dist",
-    "rootDir": ".",
-    "sourceMap": true,
-    "strict": false
-  },
-  "include": ["src/**/*"],
-  "exclude": ["**/test"]
+   "compilerOptions": {
+      "module": "commonjs",
+      "target": "es6",
+      "outDir": "dist",
+      "rootDir": ".",
+      "declaration": true,
+      "declarationMap": true,
+      "emitDeclarationOnly": false,
+      "strict": false
+   },
+   "include": ["src/**/*"],
+   "exclude": ["**/test", "node_modules", "dist"]
 }
