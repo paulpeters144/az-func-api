@@ -66,9 +66,9 @@ azApi.buildRoutes();
 const log = (msg: string) => {
    const preroute = (req: IApiRequest) => {
       console.log('PRE-HOOK: ' + msg);
-      // Returning null allows the request to proceed to the endpoint
-      // Or return an IApiResponse to protect the route/endpoint
-      // PreRouteHooks can be useful for json validation or authorization
+      // Returning null allows the request to proceed to the endpoint.
+      // Or return an IApiResponse to protect the route/endpoint.
+      // PreRouteHooks can be useful for json validation or authorization.
       return null;
    };
 

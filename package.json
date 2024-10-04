@@ -1,6 +1,6 @@
 {
    "name": "az-func-api",
-   "version": "0.0.8",
+   "version": "0.0.9",
    "description": "API Framework for Azure Functions",
    "author": "Paul Q. Peters",
    "main": "dist/src/index.js",
@@ -8,6 +8,7 @@
    "scripts": {
       "build": "tsc",
       "test": "vitest",
+      "test2": "node --loader tsx --test test/**/*Test.ts",
       "prepublishOnly": "npm run build",
       "format": "prettier --write .",
       "lint": "eslint . --ext .ts --fix"
@@ -38,7 +39,8 @@
       "eslint-plugin-import": "^2.29.1",
       "eslint-plugin-prettier": "^5.2.1",
       "prettier": "^3.3.3",
-      "typescript": "^4.0.0",
+      "tsx": "^4.19.1",
+      "typescript": "^4.9.5",
       "vitest": "^2.1.1"
    }
 }
